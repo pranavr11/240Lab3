@@ -12,7 +12,10 @@ module myAbstractFSM(
 
 
   always_comb begin 
-    unquie case(state)
-      
+    unquie case(state) begin 
+
+        
+        
+    end 
 
 endmodule: myAbstractFSM
