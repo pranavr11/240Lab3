@@ -23,10 +23,11 @@ module myAbstractFSM(
         else begin 
           nextState = play5;
         end
-      //if human moves 9, fpga moves to 3 so go to state play
+
+      //if human moves 9, fpga moves to 3
       //if human goes 2,3,4,7,8
-      //fpga moves 3 
-      //
+      //fpga moves to 9 and wins
+      //otherwise you stay at play1
       play1: 
         unique case(hMove)
           4'd9 : 
@@ -36,9 +37,12 @@ module myAbstractFSM(
           default: 
             nextState = play1;
         endcase 
-      //
-      //
-      //
+
+      //if human moves 7, 
+      //fpga moves to 2 and wins
+      //if human goes 2,4,8
+      //fpga moves to 7 and wins
+      //otherwise you stay at play3
       play3:  
         unique case (hMove) 
           4'd7 : 
@@ -48,6 +52,7 @@ module myAbstractFSM(
           default : 
             nextState = play3;
         endcase
+        
       //when Fpga wins you stay in that win state
       play9_win:
         nextState = play9_win;
@@ -91,7 +96,7 @@ module myAbstractFSM(
     endcase
   end
 
-  // State register with asynchronous reset
+  // asynchronous reset
   always_ff @(posedge clock)
     //reset state is play5
     if (reset)
